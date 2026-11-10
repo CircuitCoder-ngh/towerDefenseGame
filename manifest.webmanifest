@@ -1,0 +1,19 @@
+{
+  "name": "ZERO//DAY - Firewall Defense",
+  "short_name": "ZERO//DAY",
+  "description": "Cyberpunk pixel-art tower defense. Defend the core from malware.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "portrait",
+  "background_color": "#010402",
+  "theme_color": "#010402",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

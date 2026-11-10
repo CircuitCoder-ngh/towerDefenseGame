@@ -1,0 +1,103 @@
+/**
+ * Sector layouts (9 x 16, portrait).
+ *   .  buildable ground      #  data bus (enemy path)
+ *   S  spawn A   T  spawn B  C  core
+ *   x  hardware (blocked decoration)
+ * Paths must be 1 tile wide and never touch themselves sideways.
+ */
+export const MAPS = [
+  {
+    id: 's1', sector: '01', name: 'BOOT SEQUENCE', waves: 20, startBits: 220, hpMul: 0.9,
+    bossWaves: [10, 20], finalBoss: null,
+    desc: 'A single serpentine bus. Learn the protocols.',
+    grid: [
+      '.S.......',
+      '.#..x....',
+      '.#.......',
+      '.######..',
+      '......#..',
+      '.x....#..',
+      '..#####..',
+      '..#....x.',
+      '..#......',
+      '..######.',
+      '.......#.',
+      '.x.....#.',
+      '...#####.',
+      '...#..x..',
+      '...#.....',
+      '...C.....',
+    ],
+  },
+  {
+    id: 's2', sector: '02', name: 'DATA HIGHWAY', waves: 25, startBits: 250, hpMul: 1.08,
+    bossWaves: [10, 20, 25], finalBoss: null,
+    desc: 'A long, looping highway. Choke points are everything.',
+    grid: [
+      '.........',
+      'S######..',
+      '......#..',
+      '.x....#.x',
+      '.####.#..',
+      '.#..#.#..',
+      '.#..#.#..',
+      '.#..###..',
+      '.#.......',
+      '.#..x....',
+      '.######..',
+      '......#..',
+      '.x....#..',
+      '..#####..',
+      '..#......',
+      '..C......',
+    ],
+  },
+  {
+    id: 's3', sector: '03', name: 'DUAL UPLINK', waves: 30, startBits: 280, hpMul: 1.15,
+    bossWaves: [10, 20, 30], finalBoss: null,
+    desc: 'Two intrusion points merge into one stream.',
+    grid: [
+      '.S.....T.',
+      '.#.....#.',
+      '.#..x..#.',
+      '.##...##.',
+      '..#...#..',
+      '..#...#..',
+      '..#####..',
+      '....#....',
+      '.x..#..x.',
+      '.####....',
+      '.#.......',
+      '.######..',
+      '......#..',
+      '..x...#..',
+      '...####..',
+      '...C.....',
+    ],
+  },
+  {
+    id: 's4', sector: '04', name: 'KERNEL CORE', waves: 30, startBits: 320, hpMul: 1.0,
+    bossWaves: [10, 20, 30], finalBoss: 'kernel',
+    desc: 'Twin assault on the kernel. The final firewall.',
+    grid: [
+      'S.......T',
+      '#..x.x..#',
+      '#.......#',
+      '###...###',
+      '..#...#..',
+      'x.#.x.#.x',
+      '..#...#..',
+      '###...###',
+      '#.......#',
+      '#..x.x..#',
+      '#########',
+      '....#....',
+      '.x..#..x.',
+      '.####....',
+      '.#.......',
+      '.#######C',
+    ],
+  },
+];
+
+export const mapById = (id) => MAPS.find((m) => m.id === id);

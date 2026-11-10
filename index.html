@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#010402">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="ZERO//DAY - a cyberpunk pixel-art tower defense. Defend the core from malware.">
+  <title>ZERO//DAY</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="preload" href="assets/fonts/VT323-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/PressStart2P-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="crt">
+<div id="app" data-screen="boot">
+  <canvas id="bg"></canvas>
+
+  <!-- BOOT -->
+  <section class="screen" id="scr-boot">
+    <pre id="boot-log"></pre>
+    <div id="boot-tap" hidden>[ TAP TO JACK IN ]</div>
+  </section>
+
+  <!-- MAIN MENU -->
+  <section class="screen" id="scr-menu">
+    <div class="title-wrap">
+      <div class="title-kicker">// INTRUSION DETECTED //</div>
+      <h1 class="title glitch" data-text="ZERO//DAY">ZERO//DAY</h1>
+      <div class="subtitle">FIREWALL DEFENSE PROTOCOL</div>
+    </div>
+    <nav class="menu-buttons">
+      <button class="btn btn-primary" id="btn-continue" hidden>CONTINUE<small id="continue-info"></small></button>
+      <button class="btn btn-primary" id="btn-play">PLAY</button>
+      <button class="btn" id="btn-db">DATABASE</button>
+      <button class="btn" id="btn-help">HOW TO PLAY</button>
+      <button class="btn" id="btn-settings">SETTINGS</button>
+      <button class="btn btn-ghost" id="btn-install" hidden>INSTALL APP</button>
+    </nav>
+    <div class="menu-foot">
+      <span id="menu-stats"></span>
+      <span>v1.0</span>
+    </div>
+  </section>
+
+  <!-- SECTOR SELECT -->
+  <section class="screen" id="scr-maps">
+    <header class="scr-head">
+      <button class="btn-icon back" data-back aria-label="Back">&lsaquo;</button>
+      <h2>SELECT SECTOR</h2>
+    </header>
+    <div class="seg" id="diff-seg">
+      <button data-diff="normal" class="on">NORMAL</button>
+      <button data-diff="hard">HARD</button>
+    </div>
+    <div class="diff-note" id="diff-note"></div>
+    <div id="map-list" class="scroll"></div>
+  </section>
+
+  <!-- DATABASE -->
+  <section class="screen" id="scr-db">
+    <header class="scr-head">
+      <button class="btn-icon back" data-back aria-label="Back">&lsaquo;</button>
+      <h2>DATABASE</h2>
+    </header>
+    <div class="seg" id="db-seg">
+      <button data-tab="towers" class="on">DEFENSES</button>
+      <button data-tab="enemies">MALWARE</button>
+    </div>
+    <div id="db-list" class="scroll"></div>
+  </section>
+
+  <!-- HOW TO PLAY -->
+  <section class="screen" id="scr-help">
+    <header class="scr-head">
+      <button class="btn-icon back" data-back aria-label="Back">&lsaquo;</button>
+      <h2>HOW TO PLAY</h2>
+    </header>
+    <div class="scroll help">
+      <div class="help-card"><h3><i data-ico="ico_heart"></i>OBJECTIVE</h3>
+        <p>Malware streams along the glowing <b>data bus</b> toward your <b class="c">CORE</b>. Every leak costs integrity. Survive every wave to secure the sector.</p></div>
+      <div class="help-card"><h3><i data-ico="ico_bits"></i>DEPLOY</h3>
+        <p>Tap a defense in the dock, then tap a dark tile. <b>Tap the same tile again to confirm.</b> You can also drag a defense straight onto the map.</p></div>
+      <div class="help-card"><h3><i data-ico="ico_up"></i>MANAGE</h3>
+        <p>Tap a tower to <b>upgrade</b> it (3 levels), <b>sell</b> it (70% refund) or change its targeting: FIRST · LAST · STRONG · CLOSE.</p></div>
+      <div class="help-card"><h3><i data-ico="ico_skull"></i>WAVES</h3>
+        <p>Tap <b>START</b> / <b>NEXT</b> to send a wave. Calling a wave early while malware is still on the bus pays bonus bits. Clearing a wave pays a bonus plus Crypto Miner income.</p></div>
+      <div class="help-card"><h3><i data-ico="ico_emp"></i>ABILITIES</h3>
+        <p><b class="c">EMP</b> stuns everything and strips shields. <b class="m">PURGE</b> calls an orbital strike on a zone you tap. <b class="y">OVERCLOCK</b> boosts every tower's fire rate.</p></div>
+      <div class="help-card"><h3><i data-ico="ico_target"></i>THREATS</h3>
+        <p><b>ARMOR</b> reduces each hit, so use Snipers, Lasers and Bombs. <b class="p">CLOAKED</b> malware needs a detector: Sniper, Hub Lv2+ or Arc Lv3. Kill <b>Patchers</b> and <b>Aegis Drones</b> first.</p></div>
+      <div class="help-card"><h3><i data-ico="ico_star"></i>RATINGS</h3>
+        <p>Finish with 90%+ integrity for 3 stars, 50%+ for 2. Clearing a sector unlocks the next one and <b>ENDLESS</b> mode.</p></div>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="screen" id="scr-settings">
+    <header class="scr-head">
+      <button class="btn-icon back" data-back aria-label="Back">&lsaquo;</button>
+      <h2>SETTINGS</h2>
+    </header>
+    <div class="scroll settings">
+      <label class="row"><span>SFX VOLUME</span><input type="range" min="0" max="1" step="0.05" data-set="sfx"></label>
+      <label class="row"><span>MUSIC VOLUME</span><input type="range" min="0" max="1" step="0.05" data-set="music"></label>
+      <label class="row toggle"><span>HAPTICS</span><input type="checkbox" data-set="haptics"><i></i></label>
+      <label class="row toggle"><span>DAMAGE NUMBERS</span><input type="checkbox" data-set="dmgNums"><i></i></label>
+      <label class="row toggle"><span>SCREEN SHAKE</span><input type="checkbox" data-set="shake"><i></i></label>
+      <label class="row toggle"><span>CRT SCANLINES</span><input type="checkbox" data-set="crt"><i></i></label>
+      <label class="row toggle"><span>AUTO-START WAVES</span><input type="checkbox" data-set="autoWave"><i></i></label>
+      <label class="row toggle"><span>FULLSCREEN (TOUCH)</span><input type="checkbox" data-set="fullscreen"><i></i></label>
+      <button class="btn btn-danger" id="btn-reset">RESET PROGRESS</button>
+      <p class="credits">ZERO//DAY v1.0 · All pixel art generated procedurally · Audio synthesized live · Fonts: VT323 &amp; Press Start 2P (SIL OFL)</p>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section class="screen" id="scr-game">
+    <header id="hud">
+      <div class="stat lives" id="hud-lives"><i data-ico="ico_heart"></i><span>20</span></div>
+      <div class="stat bits" id="hud-bits"><i data-ico="ico_bits"></i><span>0</span></div>
+      <div class="stat wave" id="hud-wave"><i data-ico="ico_skull"></i><span>0/20</span></div>
+      <button class="btn-icon" id="btn-pause" aria-label="Pause"><i data-ico="ico_pause"></i></button>
+    </header>
+    <div id="stage">
+      <canvas id="game"></canvas>
+      <div id="bossbar" hidden><div class="bb-name"></div><div class="bb-bar"><div class="bb-fill"></div></div></div>
+      <div id="toasts"></div>
+      <div id="banner"></div>
+    </div>
+    <div id="actionbar">
+      <div class="ab-normal">
+        <button class="ability" data-ab="emp" aria-label="EMP"><i data-ico="ico_emp"></i><span class="cd"></span><label>EMP</label></button>
+        <button class="ability" data-ab="purge" aria-label="Purge"><i data-ico="ico_purge"></i><span class="cd"></span><label>PURGE</label></button>
+        <button class="ability" data-ab="overclock" aria-label="Overclock"><i data-ico="ico_overclock"></i><span class="cd"></span><label>BOOST</label></button>
+        <div class="spacer"></div>
+        <button id="btn-speed" class="btn-speed" aria-label="Game speed">1×</button>
+        <button id="btn-wave" class="btn-wave"><span class="w-main">START</span><small class="w-sub">WAVE 1</small></button>
+      </div>
+      <div class="ab-armed" id="armed-info"></div>
+    </div>
+    <div id="dock"></div>
+    <div id="panel" hidden></div>
+  </section>
+
+  <div id="modal" hidden><div class="modal-box" id="modal-box"></div></div>
+  <div id="rotate-hint">ROTATE TO PORTRAIT</div>
+</div>
+<div id="crt"></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
